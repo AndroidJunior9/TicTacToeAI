@@ -7,13 +7,16 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Colors
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,6 +33,9 @@ fun GameScreen(
     val aiScore = viewModel.aiScore.value
 
     val humanScore = viewModel.humanScore.value
+
+    val aiSymbol = viewModel.aiSymbol.value
+    val humanSymbol = viewModel.humanSymbol.value
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -51,16 +57,39 @@ fun GameScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround
             ){
-                Text(
-                    text = "You: $humanScore",
-                    fontSize = 24.sp,
-                    color = Color.Black
-                )
-                Text(
-                    text = "AI: $aiScore",
-                    fontSize = 24.sp,
-                    color = Color.Black
-                )
+                Column (
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    horizontalAlignment =     Alignment.CenterHorizontally
+                ){
+                    Text(
+                        text = "You: $humanScore",
+                        fontSize = 24.sp,
+                        color = Color.Black
+                    )
+
+                    Text(
+                        text = humanSymbol,
+                        fontSize = 32.sp,
+                        color = if (humanSymbol == Symbol.X) Color.Red else Color.Blue,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Column (
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    horizontalAlignment =     Alignment.CenterHorizontally
+                ){
+                    Text(
+                        text = "AI: $aiScore",
+                        fontSize = 24.sp,
+                        color = Color.Black
+                    )
+                    Text(
+                        text = aiSymbol,
+                        fontSize = 32.sp,
+                        color = if (aiSymbol == Symbol.X) Color.Red else Color.Blue,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
 
             Box(

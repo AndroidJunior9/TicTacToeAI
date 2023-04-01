@@ -25,8 +25,8 @@ class MainViewModel:ViewModel() {
 
     private val isHumansTurn = mutableStateOf(true)
 
-    private val aiSymbol = mutableStateOf( Symbol.O)
-    private val humanSymbol = mutableStateOf(Symbol.X)
+    val aiSymbol = mutableStateOf( Symbol.O)
+    val humanSymbol = mutableStateOf(Symbol.X)
 
 
     private fun bot(){
@@ -123,6 +123,7 @@ class MainViewModel:ViewModel() {
                     }
                     else -> {
                         isHumansTurn.value = false
+                        delay(200L)
                         bot()
                     }
                 }
